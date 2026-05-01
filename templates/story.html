@@ -3,23 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ story.title }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Hikoya</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=2.0">
 </head>
 <body>
     <div class="app-container">
         <header>
             <div class="menu-icon">☰</div>
-            <div class="header-tools">
-                <div class="btn-tool" id="langBtn" onclick="toggleLang()">Ўзбек</div>
-                <div class="btn-tool" id="themeBtn" onclick="toggleTheme()">☀️</div>
-                <div class="menu-dots" style="cursor:pointer">⋮</div>
+            
+            <div class="nav-tools">
+                <button class="btn-icon" id="langBtn" onclick="toggleLang()">Ўзбек</button>
+                <button class="btn-icon" id="themeBtn" onclick="toggleTheme()">☀️</button>
+                <div style="font-size: 20px; cursor: pointer;">⋮</div>
             </div>
         </header>
 
         <main class="content">
-            <h2 id="title">{{ story.title }}</h2>
-            <div class="story-text" id="mainContent">{{ story.content }}</div>
+            <div id="lat-content">
+                <h2>{{ story.title_lat }}</h2>
+                <div class="story-text">{{ story.content_lat }}</div>
+            </div>
+
+            <div id="cyr-content" style="display: none;">
+                <h2>{{ story.title_cyr }}</h2>
+                <div class="story-text">{{ story.content_cyr }}</div>
+            </div>
         </main>
     </div>
 
@@ -38,8 +46,18 @@
 
         function toggleLang() {
             const btn = document.getElementById('langBtn');
-            btn.innerText = btn.innerText === 'Ўзбек' ? 'O‘zbek' : 'Ўзбек';
-            // Bu yerda kelajakda matnni konvertatsiya qilish funksiyasini ulasangiz bo'ladi
+            const lat = document.getElementById('lat-content');
+            const cyr = document.getElementById('cyr-content');
+
+            if (btn.innerText === 'Ўзбек') {
+                lat.style.display = 'none';
+                cyr.style.display = 'block';
+                btn.innerText = 'Lotin';
+            } else {
+                lat.style.display = 'block';
+                cyr.style.display = 'none';
+                btn.innerText = 'Ўзбек';
+            }
         }
     </script>
 </body>
