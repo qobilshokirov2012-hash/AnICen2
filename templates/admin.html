@@ -1,37 +1,64 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="uz" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
+    <title>Hikoya</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=2.0">
 </head>
 <body>
     <div class="app-container">
         <header>
-            <strong>Admin Panel</strong>
-            <a href="/" style="text-decoration: none;">🏠</a>
-        </header>
-        
-        <div class="content">
-            <form method="POST" class="admin-form">
-                <input type="text" name="title" placeholder="Sarlavha" required>
-                <textarea name="content" placeholder="Hikoya matni..." rows="6" required></textarea>
-                <button type="submit" style="background: var(--accent); color: white; border: none; padding: 10px; width: 100%; border-radius: 5px;">Saqlash</button>
-            </form>
-
-            <hr style="border: 0; border-top: 1px solid var(--border); margin: 20px 0;">
-
-            {% for s in stories %}
-            <div style="border-bottom: 1px solid var(--border); padding: 10px 0; display: flex; justify-content: space-between;">
-                <span>{{ s.title }}</span>
-                <div>
-                    <a href="/story/{{ s['_id'] }}" style="color: var(--accent); margin-right: 10px;">Ko'rish</a>
-                    <a href="/delete/{{ s['_id'] }}" style="color: red;">O'chirish</a>
-                </div>
+            <div class="menu-icon">☰</div>
+            
+            <div class="nav-tools">
+                <button class="btn-icon" id="langBtn" onclick="toggleLang()">Ўзбек</button>
+                <button class="btn-icon" id="themeBtn" onclick="toggleTheme()">☀️</button>
+                <div style="font-size: 20px; cursor: pointer;">⋮</div>
             </div>
-            {% endfor %}
-        </div>
+        </header>
+
+        <main class="content">
+            <div id="lat-content">
+                <h2>{{ story.title_lat }}</h2>
+                <div class="story-text">{{ story.content_lat }}</div>
+            </div>
+
+            <div id="cyr-content" style="display: none;">
+                <h2>{{ story.title_cyr }}</h2>
+                <div class="story-text">{{ story.content_cyr }}</div>
+            </div>
+        </main>
     </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const btn = document.getElementById('themeBtn');
+            if (html.getAttribute('data-theme') === 'light') {
+                html.setAttribute('data-theme', 'dark');
+                btn.innerText = '🌙';
+            } else {
+                html.setAttribute('data-theme', 'light');
+                btn.innerText = '☀️';
+            }
+        }
+
+        function toggleLang() {
+            const btn = document.getElementById('langBtn');
+            const lat = document.getElementById('lat-content');
+            const cyr = document.getElementById('cyr-content');
+
+            if (btn.innerText === 'Ўзбек') {
+                lat.style.display = 'none';
+                cyr.style.display = 'block';
+                btn.innerText = 'Lotin';
+            } else {
+                lat.style.display = 'block';
+                cyr.style.display = 'none';
+                btn.innerText = 'Ўзбек';
+            }
+        }
+    </script>
 </body>
 </html>
