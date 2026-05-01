@@ -1,23 +1,45 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="uz" data-theme="light">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ story.title }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="story-container">
-        <div class="menu-dots" onclick="copyLink()">⋮</div>
-        
-        <h1 style="color: #ffd700; text-shadow: 0 0 10px #ffd700;">{{ story.title }}</h1>
-        <hr style="border-color: #333;">
-        <p style="line-height: 1.8; white-space: pre-wrap;">{{ story.content }}</p>
+    <div class="app-container">
+        <header>
+            <div class="menu-icon">☰</div>
+            <div class="header-tools">
+                <div class="btn-tool" id="langBtn" onclick="toggleLang()">Ўзбек</div>
+                <div class="btn-tool" id="themeBtn" onclick="toggleTheme()">☀️</div>
+                <div class="menu-dots" style="cursor:pointer">⋮</div>
+            </div>
+        </header>
+
+        <main class="content">
+            <h2 id="title">{{ story.title }}</h2>
+            <div class="story-text" id="mainContent">{{ story.content }}</div>
+        </main>
     </div>
 
     <script>
-        function copyLink() {
-            navigator.clipboard.writeText(window.location.href);
-            alert("Hikoya havolasi nusxalandi!");
+        function toggleTheme() {
+            const html = document.documentElement;
+            const btn = document.getElementById('themeBtn');
+            if (html.getAttribute('data-theme') === 'light') {
+                html.setAttribute('data-theme', 'dark');
+                btn.innerText = '🌙';
+            } else {
+                html.setAttribute('data-theme', 'light');
+                btn.innerText = '☀️';
+            }
+        }
+
+        function toggleLang() {
+            const btn = document.getElementById('langBtn');
+            btn.innerText = btn.innerText === 'Ўзбек' ? 'O‘zbek' : 'Ўзбек';
+            // Bu yerda kelajakda matnni konvertatsiya qilish funksiyasini ulasangiz bo'ladi
         }
     </script>
 </body>
