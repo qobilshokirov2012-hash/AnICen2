@@ -1,55 +1,59 @@
 :root {
-    --bg-color: #ffffff;
-    --text-color: #1a1a1a;
-    --header-bg: #f8f9fa;
-    --border-color: #eeeeee;
-    --accent: #28a745; /* Islom.uz kabi yashil rang */
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --header-bg: #f5f5f5;
+    --border: #dddddd;
+    --accent: #108a00;
 }
 
 [data-theme="dark"] {
-    --bg-color: #121212;
-    --text-color: #e0e0e0;
-    --header-bg: #1f1f1f;
-    --border-color: #333333;
+    --bg: #121212;
+    --text: #e0e0e0;
+    --header-bg: #1e1e1e;
+    --border: #333333;
+    --accent: #00ff88;
 }
 
 body {
     margin: 0;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    transition: 0.3s;
+    padding: 0;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', sans-serif;
+    transition: 0.3s ease;
 }
 
 .app-container {
-    max-width: 600px;
+    max-width: 500px; /* Telefon kengligi */
     margin: 0 auto;
     min-height: 100vh;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
 }
 
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 20px;
+    padding: 10px 15px;
     background: var(--header-bg);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border);
     position: sticky;
     top: 0;
 }
 
-.header-tools {
+.nav-tools {
     display: flex;
-    gap: 15px;
     align-items: center;
+    gap: 12px;
 }
 
-.btn-tool {
+.btn-icon {
     background: none;
-    border: 1px solid var(--border-color);
-    color: var(--text-color);
-    padding: 5px 10px;
-    border-radius: 6px;
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 4px 8px;
+    border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
 }
@@ -59,7 +63,19 @@ header {
 }
 
 .story-text {
-    line-height: 1.8;
-    font-size: 19px;
+    font-size: 18px;
+    line-height: 1.6;
     white-space: pre-wrap;
+}
+
+/* Admin form */
+.admin-form input, .admin-form textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: var(--header-bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    box-sizing: border-box;
 }
