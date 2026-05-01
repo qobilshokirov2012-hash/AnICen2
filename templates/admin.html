@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="story-container">
+        <h2 style="color: #00f3ff; text-shadow: 0 0 5px #00f3ff;">Admin Panel - Hikoya qo'shish</h2>
+        <form method="POST">
+            <input type="text" name="title" placeholder="Hikoya sarlavhasi" required style="width: 100%; box-sizing: border-box; padding: 10px; margin-bottom: 10px; background: #222; border: 1px solid #00f3ff; color: white; border-radius: 5px;">
+            <textarea name="content" placeholder="Hikoya matni..." required style="width: 100%; box-sizing: border-box; height: 150px; padding: 10px; margin-bottom: 10px; background: #222; border: 1px solid #ffd700; color: white; border-radius: 5px;"></textarea>
+            <button type="submit" class="btn-neon-blue">Qo'shish</button>
+        </form>
+
+        <h3 style="margin-top: 40px; color: #ffd700;">Barcha hikoyalar:</h3>
+        {% for story in stories %}
+            <div style="border: 1px solid #333; background: #1a1a1a; padding: 15px; margin-bottom: 15px; border-radius: 5px;">
+                <h4 style="margin-top: 0;">{{ story.title }}</h4>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="/story/{{ story['_id'] }}" class="btn-neon-blue" target="_blank" style="padding: 5px 15px; font-size: 14px;">Ko'rish</a>
+                    <a href="/edit/{{ story['_id'] }}" class="btn-neon-yellow" style="padding: 5px 15px; font-size: 14px;">Tahrirlash</a>
+                    <a href="/delete/{{ story['_id'] }}" class="btn-neon-red" style="padding: 5px 15px; font-size: 14px;" onclick="return confirm('Rostdan ham o\'chirmoqchimisiz?');">O'chirish</a>
+                </div>
+            </div>
+        {% else %}
+            <p style="color: #888;">Hozircha hikoyalar yo'q.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
