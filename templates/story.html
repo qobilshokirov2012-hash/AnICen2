@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hikoya</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=2.0">
+    <title>{{ story.title_lat }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=3.0">
 </head>
 <body>
     <div class="app-container">
         <header>
             <div class="menu-icon">☰</div>
-            
             <div class="nav-tools">
                 <button class="btn-icon" id="langBtn" onclick="toggleLang()">Ўзбек</button>
                 <button class="btn-icon" id="themeBtn" onclick="toggleTheme()">☀️</button>
