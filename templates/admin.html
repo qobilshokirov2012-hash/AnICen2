@@ -2,31 +2,36 @@
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=2.0">
 </head>
 <body>
-    <div class="story-container">
-        <h2 style="color: #00f3ff; text-shadow: 0 0 5px #00f3ff;">Admin Panel - Hikoya qo'shish</h2>
-        <form method="POST">
-            <input type="text" name="title" placeholder="Hikoya sarlavhasi" required style="width: 100%; box-sizing: border-box; padding: 10px; margin-bottom: 10px; background: #222; border: 1px solid #00f3ff; color: white; border-radius: 5px;">
-            <textarea name="content" placeholder="Hikoya matni..." required style="width: 100%; box-sizing: border-box; height: 150px; padding: 10px; margin-bottom: 10px; background: #222; border: 1px solid #ffd700; color: white; border-radius: 5px;"></textarea>
-            <button type="submit" class="btn-neon-blue">Qo'shish</button>
-        </form>
+    <div class="app-container">
+        <header>
+            <strong>Admin Panel</strong>
+            <a href="/" style="text-decoration: none;">🏠</a>
+        </header>
+        
+        <div class="content">
+            <form method="POST" class="admin-form">
+                <input type="text" name="title" placeholder="Sarlavha" required>
+                <textarea name="content" placeholder="Hikoya matni..." rows="6" required></textarea>
+                <button type="submit" style="background: var(--accent); color: white; border: none; padding: 10px; width: 100%; border-radius: 5px;">Saqlash</button>
+            </form>
 
-        <h3 style="margin-top: 40px; color: #ffd700;">Barcha hikoyalar:</h3>
-        {% for story in stories %}
-            <div style="border: 1px solid #333; background: #1a1a1a; padding: 15px; margin-bottom: 15px; border-radius: 5px;">
-                <h4 style="margin-top: 0;">{{ story.title }}</h4>
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <a href="/story/{{ story['_id'] }}" class="btn-neon-blue" target="_blank" style="padding: 5px 15px; font-size: 14px;">Ko'rish</a>
-                    <a href="/edit/{{ story['_id'] }}" class="btn-neon-yellow" style="padding: 5px 15px; font-size: 14px;">Tahrirlash</a>
-                    <a href="/delete/{{ story['_id'] }}" class="btn-neon-red" style="padding: 5px 15px; font-size: 14px;" onclick="return confirm('Rostdan ham o\'chirmoqchimisiz?');">O'chirish</a>
+            <hr style="border: 0; border-top: 1px solid var(--border); margin: 20px 0;">
+
+            {% for s in stories %}
+            <div style="border-bottom: 1px solid var(--border); padding: 10px 0; display: flex; justify-content: space-between;">
+                <span>{{ s.title }}</span>
+                <div>
+                    <a href="/story/{{ s['_id'] }}" style="color: var(--accent); margin-right: 10px;">Ko'rish</a>
+                    <a href="/delete/{{ s['_id'] }}" style="color: red;">O'chirish</a>
                 </div>
             </div>
-        {% else %}
-            <p style="color: #888;">Hozircha hikoyalar yo'q.</p>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 </body>
 </html>
